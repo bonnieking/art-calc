@@ -22,7 +22,7 @@ function createPaintingInputs(count) {
     const row = document.createElement("fieldset");
     row.className = "painting-row";
     row.innerHTML = `
-      <legend>Painting ${idx}</legend>
+      <legend>Picture ${idx}</legend>
       <label>
         Height (in)
         <input name="height-${i}" type="number" step="0.1" min="0.1" value="24" required />
@@ -48,7 +48,7 @@ function readPaintingValues(count) {
     const wireDistance = Number(detailsForm.elements[`wire-${i}`].value);
 
     if ([height, width, wireDistance].some((v) => Number.isNaN(v) || v < 0)) {
-      throw new Error("Please enter valid non-negative numbers for all painting fields.");
+      throw new Error("Please enter valid non-negative numbers for all picture fields.");
     }
 
     paintings.push({ height, width, wireDistance });
@@ -59,7 +59,7 @@ function readPaintingValues(count) {
 function calculateLayout({ eyeHeight, wallWidth, paintings }) {
   const totalWidth = paintings.reduce((sum, p) => sum + p.width, 0);
   if (totalWidth > wallWidth) {
-    throw new Error("Total painting widths exceed wall width. Increase wall width or reduce painting widths.");
+    throw new Error("Total picture widths exceed wall width. Increase wall width or reduce picture widths.");
   }
 
   const gap = (wallWidth - totalWidth) / (paintings.length + 1);
@@ -86,7 +86,7 @@ function renderResults(rows, wallWidth) {
     .map(
       (r) => `
       <tr>
-        <td>Painting ${r.index}, Nail ${r.index}</td>
+        <td>Picture ${r.index}, Nail ${r.index}</td>
         <td>${fmt(r.nailHeight)} in</td>
         <td>${fmt(r.lateralDistance)} in from left wall</td>
       </tr>
@@ -96,7 +96,7 @@ function renderResults(rows, wallWidth) {
 
   results.innerHTML = `
     <h2>Nail Placements</h2>
-    <p class="hint">Wall width: ${fmt(wallWidth)} in. Paintings are evenly spaced horizontally with equal left/right margins and inter-painting gaps.</p>
+    <p class="hint">Wall width: ${fmt(wallWidth)} in. Pictures are evenly spaced horizontally with equal left/right margins and inter-picture gaps.</p>
     <table>
       <thead>
         <tr>
