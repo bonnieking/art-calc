@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Art Calc</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="card">
+        <h1>Art Calc</h1>
+        <p class="subtitle">Calculate nail height for hanging paintings.</p>
+
+        <form id="calc-form" class="grid">
+          <label>
+            Desired center height
+            <input id="centerHeight" type="number" step="0.1" min="0" value="57" required />
+          </label>
+
+          <label>
+            Painting height
+            <input id="paintingHeight" type="number" step="0.1" min="0" value="24" required />
+          </label>
+
+          <label>
+            Drop from top to wire/hanger
+            <input id="drop" type="number" step="0.1" min="0" value="3" required />
+          </label>
+
+          <label>
+            Units
+            <select id="units">
+              <option value="in">inches</option>
+              <option value="cm">centimeters</option>
+            </select>
+          </label>
+
+          <button type="submit">Calculate</button>
+        </form>
+
+        <div id="result" class="result" aria-live="polite"></div>
+
+        <details>
+          <summary>Formula</summary>
+          <p><code>nail height = center height + (painting height / 2) - drop</code></p>
+        </details>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
