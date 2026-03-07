@@ -4,6 +4,8 @@ const detailsSection = document.getElementById("details-section");
 const paintingsGrid = document.getElementById("paintings-grid");
 const results = document.getElementById("results");
 
+const MOBILE_STORAGE_KEY = "art-calc:last-layout";
+
 const state = {
   eyeHeight: 57,
   wallWidth: 120,
@@ -81,6 +83,15 @@ function calculateLayout({ eyeHeight, wallWidth, paintings }) {
   });
 }
 
+function saveMobileLayout(rows, wallWidth) {
+  const payload = {
+    wallWidth,
+    generatedAt: new Date().toISOString(),
+    rows,
+  };
+  localStorage.setItem(MOBILE_STORAGE_KEY, JSON.stringify(payload));
+}
+
 function renderResults(rows, wallWidth) {
   const list = rows
     .map(
@@ -97,6 +108,7 @@ function renderResults(rows, wallWidth) {
   results.innerHTML = `
     <h2>Nail Placements</h2>
     <p class="hint">Wall width: ${fmt(wallWidth)} in. Pictures are evenly spaced horizontally with equal left/right margins and inter-picture gaps.</p>
+    <p><a class="mobile-link" href="mobile.html" target="_blank" rel="noopener">Open mobile hanging table (big numbers)</a></p>
     <table>
       <thead>
         <tr>
@@ -140,6 +152,7 @@ detailsForm.addEventListener("submit", (e) => {
       wallWidth: state.wallWidth,
       paintings,
     });
+    saveMobileLayout(rows, state.wallWidth);
     renderResults(rows, state.wallWidth);
   } catch (err) {
     results.classList.remove("hidden");

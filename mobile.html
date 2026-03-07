@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Art Calc Mobile Table</title>
+    <style>
+      :root {
+        --bg: #fffdf8;
+        --ink: #222d3f;
+        --muted: #5f6c82;
+        --line: rgba(34, 45, 63, 0.2);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Courier New", "Lucida Console", monospace;
+      }
+
+      h1 {
+        margin: 0 0 0.35rem;
+        font-size: 1.15rem;
+      }
+
+      .meta {
+        margin-bottom: 0.75rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 0.5rem 0.35rem;
+        text-align: left;
+      }
+
+      th {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .big {
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      .placement {
+        font-size: 0.9rem;
+      }
+
+      .empty {
+        margin-top: 1rem;
+        color: #8a3245;
+        font-weight: 700;
+      }
+
+      .back {
+        margin-top: 0.8rem;
+        display: inline-block;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hanging Table</h1>
+    <div id="meta" class="meta"></div>
+    <div id="table-wrap"></div>
+    <a class="back" href="index.html">Back to calculator</a>
+
+    <script>
+      const KEY = "art-calc:last-layout";
+      const meta = document.getElementById("meta");
+      const wrap = document.getElementById("table-wrap");
+
+      function fmt(v) {
+        return Number(v).toFixed(2).replace(/\.00$/, "");
+      }
+
+      function render() {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) {
+          wrap.innerHTML = '<p class="empty">No saved layout yet. Calculate from the main page first.</p>';
+          return;
+        }
+
+        let data;
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          wrap.innerHTML = '<p class="empty">Saved layout data is invalid. Recalculate from the main page.</p>';
+          return;
+        }
+
+        const rows = Array.isArray(data.rows) ? data.rows : [];
+        if (!rows.length) {
+          wrap.innerHTML = '<p class="empty">No rows found. Recalculate from the main page.</p>';
+          return;
+        }
+
+        meta.textContent = `Wall width: ${fmt(data.wallWidth)} in`;
+
+        const body = rows
+          .map(
+            (r) => `
+              <tr>
+                <td class="placement">Picture ${r.index}<br>Nail ${r.index}</td>
+                <td class="big">${fmt(r.nailHeight)} in</td>
+                <td class="big">${fmt(r.lateralDistance)} in</td>
+              </tr>
+            `
+          )
+          .join("");
+
+        wrap.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Placement</th>
+                <th>Nail Height</th>
+                <th>From Left Wall</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+          </table>
+        `;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
