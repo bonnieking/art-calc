@@ -42,6 +42,21 @@ h2 {
   letter-spacing: 0.02em;
 }
 
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.mark {
+  width: 0.78em;
+  height: 0.78em;
+  background: #000;
+  display: inline-block;
+  transform: translateY(-0.02em);
+}
+
+
 .subtitle {
   margin-top: 0.35rem;
   color: var(--muted);
