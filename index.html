@@ -10,41 +10,40 @@
     <main class="app">
       <section class="card">
         <h1>Art Calc</h1>
-        <p class="subtitle">Calculate nail height for hanging paintings.</p>
+        <p class="subtitle">Evenly space paintings across a wall and calculate nail heights.</p>
 
-        <form id="calc-form" class="grid">
+        <form id="setup-form" class="grid">
           <label>
-            Desired center height
-            <input id="centerHeight" type="number" step="0.1" min="0" value="57" required />
+            Eye height (in)
+            <input id="eyeHeight" type="number" step="0.1" min="0" value="57" required />
           </label>
 
           <label>
-            Painting height
-            <input id="paintingHeight" type="number" step="0.1" min="0" value="24" required />
+            Number of paintings
+            <input id="paintingCount" type="number" min="1" max="24" value="2" required />
           </label>
 
           <label>
-            Drop from top to wire/hanger
-            <input id="drop" type="number" step="0.1" min="0" value="3" required />
+            Wall width (in)
+            <input id="wallWidth" type="number" step="0.1" min="1" value="120" required />
           </label>
 
-          <label>
-            Units
-            <select id="units">
-              <option value="in">inches</option>
-              <option value="cm">centimeters</option>
-            </select>
-          </label>
-
-          <button type="submit">Calculate</button>
+          <button type="submit">Next: Painting Details</button>
         </form>
 
-        <div id="result" class="result" aria-live="polite"></div>
+        <section id="details-section" class="details hidden">
+          <h2>Painting Details (inches)</h2>
+          <p class="hint">
+            <strong>Wire distance</strong> = distance from the <strong>top edge of the painting</strong> down to the wire/hanger contact point where the nail sits when hung.
+          </p>
 
-        <details>
-          <summary>Formula</summary>
-          <p><code>nail height = center height + (painting height / 2) - drop</code></p>
-        </details>
+          <form id="details-form">
+            <div id="paintings-grid" class="paintings-grid"></div>
+            <button type="submit">Calculate Nails</button>
+          </form>
+        </section>
+
+        <section id="results" class="results hidden" aria-live="polite"></section>
       </section>
     </main>
 
