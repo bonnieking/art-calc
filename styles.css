@@ -1,10 +1,13 @@
 :root {
-  --bg-a: #f4f8ff;
-  --bg-b: #fff8ef;
-  --ink: #253047;
-  --muted: #5f6c82;
-  --accent: #2a7fff;
-  --card: rgba(255, 255, 255, 0.88);
+  --bg-a: #f6f2ff;
+  --bg-b: #fff8f2;
+  --ink: #2f3a4a;
+  --muted: #6f7890;
+  --accent: #7ea9d9;
+  --accent-ink: #1f2a38;
+  --card: rgba(255, 255, 255, 0.9);
+  --field: #fcfbff;
+  --line: rgba(77, 88, 114, 0.22);
 }
 
 * {
@@ -13,7 +16,7 @@
 
 body {
   margin: 0;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-family: "Courier New", "Lucida Console", monospace;
   color: var(--ink);
   background: linear-gradient(135deg, var(--bg-a), var(--bg-b));
   min-height: 100vh;
@@ -27,15 +30,16 @@ body {
 
 .card {
   background: var(--card);
-  border: 1px solid rgba(37, 48, 71, 0.12);
+  border: 1px solid var(--line);
   border-radius: 14px;
   padding: 1.25rem;
-  box-shadow: 0 8px 24px rgba(37, 48, 71, 0.12);
+  box-shadow: 0 8px 20px rgba(70, 78, 105, 0.14);
 }
 
 h1,
 h2 {
   margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .subtitle {
@@ -59,18 +63,22 @@ label {
 
 input,
 button {
-  border: 1px solid rgba(37, 48, 71, 0.22);
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 0.6rem 0.7rem;
   font: inherit;
 }
 
+input {
+  background: var(--field);
+}
+
 button {
   grid-column: span 2;
-  border: none;
-  background: var(--accent);
-  color: white;
-  font-weight: 650;
+  border: 1px solid rgba(83, 108, 138, 0.35);
+  background: linear-gradient(150deg, #cfe6ff, #b8d5f5);
+  color: var(--accent-ink);
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -93,20 +101,21 @@ button {
 }
 
 .painting-row {
-  border: 1px solid rgba(37, 48, 71, 0.16);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.8rem;
   display: grid;
   gap: 0.7rem;
   grid-template-columns: repeat(3, 1fr);
+  background: linear-gradient(140deg, #fff9f4, #f8fbff);
 }
 
 .results {
   margin-top: 1.2rem;
   padding: 0.9rem;
   border-radius: 10px;
-  background: linear-gradient(140deg, #eaf3ff, #fdf7e8);
-  border: 1px solid rgba(42, 127, 255, 0.2);
+  background: linear-gradient(140deg, #eef6ff, #fff8e9);
+  border: 1px solid rgba(126, 169, 217, 0.45);
 }
 
 table {
@@ -120,11 +129,11 @@ th,
 td {
   text-align: left;
   padding: 0.5rem 0.4rem;
-  border-bottom: 1px solid rgba(37, 48, 71, 0.12);
+  border-bottom: 1px solid rgba(77, 88, 114, 0.16);
 }
 
 .error {
-  color: #9c1f2b;
+  color: #91424f;
   font-weight: 600;
 }
 
