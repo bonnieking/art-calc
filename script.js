@@ -72,13 +72,9 @@ function applyTheme(theme) {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem(THEME_KEY);
-  if (THEMES.includes(saved)) {
-    applyTheme(saved);
-    return;
-  }
-
+  // Force light mode on initial load, regardless of prior saved preference.
   applyTheme("light");
+  localStorage.setItem(THEME_KEY, "light");
 }
 
 function ensureTrippyCanvasSize() {
