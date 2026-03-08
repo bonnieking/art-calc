@@ -34,6 +34,18 @@
   --line: rgba(123, 96, 168, 0.25);
 }
 
+:root[data-theme="trippy"] {
+  --bg-a: #0c061b;
+  --bg-b: #150a2c;
+  --ink: #f4e9ff;
+  --muted: #d8c8ee;
+  --accent: #9ef0d5;
+  --accent-ink: #16072e;
+  --card: rgba(20, 12, 37, 0.7);
+  --field: rgba(44, 28, 74, 0.7);
+  --line: rgba(219, 180, 255, 0.35);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -44,12 +56,30 @@ body {
   color: var(--ink);
   background: linear-gradient(135deg, var(--bg-a), var(--bg-b));
   min-height: 100vh;
+  position: relative;
+}
+
+#trippy-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+:root[data-theme="trippy"] #trippy-canvas {
+  opacity: 0.95;
 }
 
 .app {
   max-width: 860px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -58,6 +88,7 @@ body {
   border-radius: 14px;
   padding: 1.25rem;
   box-shadow: 0 8px 20px rgba(70, 78, 105, 0.14);
+  backdrop-filter: blur(4px);
 }
 
 h1,
@@ -235,4 +266,27 @@ td {
 
 :root[data-theme="rainbow"] .theme-toggle {
   background: linear-gradient(150deg, #f8d6ff, #ffe6c8);
+}
+
+:root[data-theme="trippy"] body {
+  background: radial-gradient(circle at 20% 0%, #25113f 0%, #130724 60%, #0a0414 100%);
+}
+
+:root[data-theme="trippy"] button {
+  background: linear-gradient(150deg, #8ff9db, #f4acff, #99d4ff);
+  color: #19092e;
+}
+
+:root[data-theme="trippy"] .theme-toggle {
+  background: linear-gradient(150deg, #f7adff, #9ef7dd);
+  color: #19092e;
+}
+
+:root[data-theme="trippy"] .painting-row {
+  background: linear-gradient(140deg, rgba(114, 72, 175, 0.35), rgba(58, 135, 186, 0.3));
+}
+
+:root[data-theme="trippy"] .results {
+  background: linear-gradient(140deg, rgba(99, 58, 181, 0.35), rgba(40, 110, 179, 0.3));
+  border-color: rgba(206, 169, 255, 0.5);
 }
