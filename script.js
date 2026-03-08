@@ -3,8 +3,10 @@ const detailsForm = document.getElementById("details-form");
 const detailsSection = document.getElementById("details-section");
 const paintingsGrid = document.getElementById("paintings-grid");
 const results = document.getElementById("results");
+const themeToggle = document.getElementById("theme-toggle");
 
 const MOBILE_STORAGE_KEY = "art-calc:last-layout";
+const THEME_KEY = "art-calc:theme";
 
 const state = {
   eyeHeight: 57,
@@ -15,6 +17,36 @@ const state = {
 function fmt(v) {
   return Number(v).toFixed(2).replace(/\.00$/, "");
 }
+
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  if (themeToggle) {
+    themeToggle.textContent = theme === "dark" ? "Light" : "Dark";
+  }
+}
+
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "dark" || saved === "light") {
+    applyTheme(saved);
+    return;
+  }
+
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark ? "dark" : "light");
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  });
+}
+
+initTheme();
 
 function createPaintingInputs(count) {
   paintingsGrid.innerHTML = "";

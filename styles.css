@@ -10,6 +10,18 @@
   --line: rgba(77, 88, 114, 0.22);
 }
 
+:root[data-theme="dark"] {
+  --bg-a: #171d2a;
+  --bg-b: #1d1622;
+  --ink: #e7eefb;
+  --muted: #aeb9d1;
+  --accent: #4b6689;
+  --accent-ink: #eff5ff;
+  --card: rgba(29, 37, 52, 0.88);
+  --field: #222b3d;
+  --line: rgba(189, 205, 238, 0.22);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -42,6 +54,12 @@ h2 {
   letter-spacing: 0.02em;
 }
 
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
 
 .subtitle {
   margin-top: 0.35rem;
@@ -72,6 +90,7 @@ button {
 
 input {
   background: var(--field);
+  color: var(--ink);
 }
 
 button {
@@ -81,6 +100,25 @@ button {
   color: var(--accent-ink);
   font-weight: 700;
   cursor: pointer;
+}
+
+.theme-toggle {
+  grid-column: auto;
+  width: auto;
+  min-width: 74px;
+  padding: 0.45rem 0.65rem;
+  background: linear-gradient(150deg, #ece8ff, #dcecff);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] button {
+  background: linear-gradient(150deg, #4a6388, #3d5574);
+}
+
+:root[data-theme="dark"] .theme-toggle {
+  background: linear-gradient(150deg, #2a3448, #324058);
+  color: #f2f6ff;
 }
 
 .hidden {
@@ -111,12 +149,25 @@ button {
   background: linear-gradient(140deg, #fff9f4, #f8fbff);
 }
 
+:root[data-theme="dark"] .painting-row {
+  background: linear-gradient(140deg, #25314a, #2b253f);
+}
+
 .results {
   margin-top: 1.2rem;
   padding: 0.9rem;
   border-radius: 10px;
   background: linear-gradient(140deg, #eef6ff, #fff8e9);
   border: 1px solid rgba(126, 169, 217, 0.45);
+}
+
+:root[data-theme="dark"] .results {
+  background: linear-gradient(140deg, #26364f, #332a3e);
+  border-color: rgba(166, 190, 231, 0.35);
+}
+
+a {
+  color: var(--ink);
 }
 
 table {
