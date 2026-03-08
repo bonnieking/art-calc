@@ -5,10 +5,13 @@ const paintingsGrid = document.getElementById("paintings-grid");
 const results = document.getElementById("results");
 const themeToggle = document.getElementById("theme-toggle");
 const trippyCanvas = document.getElementById("trippy-canvas");
+const eagleIframe = document.getElementById("eagle-iframe");
 
 const MOBILE_STORAGE_KEY = "art-calc:last-layout";
 const THEME_KEY = "art-calc:theme";
-const THEMES = ["light", "dark", "rainbow", "trippy"];
+const THEMES = ["light", "dark", "rainbow", "trippy", "eagle"];
+const EAGLE_EMBED_URL =
+  "https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1&controls=0&loop=1&playlist=B4-L2nfGcuE&modestbranding=1&rel=0&playsinline=1";
 
 const state = {
   eyeHeight: 57,
@@ -30,6 +33,18 @@ function fmt(v) {
   return Number(v).toFixed(2).replace(/\.00$/, "");
 }
 
+function startEagleBackground() {
+  if (!eagleIframe) return;
+  if (eagleIframe.src !== EAGLE_EMBED_URL) {
+    eagleIframe.src = EAGLE_EMBED_URL;
+  }
+}
+
+function stopEagleBackground() {
+  if (!eagleIframe) return;
+  eagleIframe.src = "";
+}
+
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   if (themeToggle) {
@@ -38,6 +53,7 @@ function applyTheme(theme) {
       dark: "Theme: Dark",
       rainbow: "Theme: Rainbow",
       trippy: "Theme: Trippy",
+      eagle: "Theme: Eagle",
     };
     themeToggle.textContent = labels[theme] || "Theme";
   }
@@ -46,6 +62,12 @@ function applyTheme(theme) {
     startTrippyBackground();
   } else {
     stopTrippyBackground();
+  }
+
+  if (theme === "eagle") {
+    startEagleBackground();
+  } else {
+    stopEagleBackground();
   }
 }
 

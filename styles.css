@@ -46,6 +46,18 @@
   --line: rgba(219, 180, 255, 0.35);
 }
 
+:root[data-theme="eagle"] {
+  --bg-a: #1c2d33;
+  --bg-b: #0f171b;
+  --ink: #f5f8fc;
+  --muted: #d2d9e4;
+  --accent: #b9d6ff;
+  --accent-ink: #0a151f;
+  --card: rgba(14, 24, 35, 0.62);
+  --field: rgba(25, 38, 51, 0.72);
+  --line: rgba(220, 236, 255, 0.34);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -57,6 +69,32 @@ body {
   background: linear-gradient(135deg, var(--bg-a), var(--bg-b));
   min-height: 100vh;
   position: relative;
+}
+
+#eagle-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  overflow: hidden;
+}
+
+#eagle-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: 0;
+}
+
+:root[data-theme="eagle"] #eagle-bg {
+  opacity: 0.92;
 }
 
 #trippy-canvas {
@@ -289,4 +327,27 @@ td {
 :root[data-theme="trippy"] .results {
   background: linear-gradient(140deg, rgba(99, 58, 181, 0.35), rgba(40, 110, 179, 0.3));
   border-color: rgba(206, 169, 255, 0.5);
+}
+
+:root[data-theme="eagle"] body {
+  background: radial-gradient(circle at 20% 0%, #2a3a40 0%, #182329 58%, #10171c 100%);
+}
+
+:root[data-theme="eagle"] button {
+  background: linear-gradient(150deg, #d6e4ff, #cee9f4);
+  color: #0d1a26;
+}
+
+:root[data-theme="eagle"] .theme-toggle {
+  background: linear-gradient(150deg, #f0f7ff, #d6e3f4);
+  color: #0d1a26;
+}
+
+:root[data-theme="eagle"] .painting-row {
+  background: linear-gradient(140deg, rgba(74, 95, 117, 0.5), rgba(41, 63, 81, 0.42));
+}
+
+:root[data-theme="eagle"] .results {
+  background: linear-gradient(140deg, rgba(88, 112, 138, 0.5), rgba(46, 71, 95, 0.42));
+  border-color: rgba(206, 225, 255, 0.5);
 }
