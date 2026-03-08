@@ -22,6 +22,18 @@
   --line: rgba(189, 205, 238, 0.22);
 }
 
+:root[data-theme="rainbow"] {
+  --bg-a: #ffe9f5;
+  --bg-b: #e9f5ff;
+  --ink: #3a2f52;
+  --muted: #7a6699;
+  --accent: #d29be8;
+  --accent-ink: #33244a;
+  --card: rgba(255, 255, 255, 0.88);
+  --field: #fff9ff;
+  --line: rgba(123, 96, 168, 0.25);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -201,4 +213,26 @@ td {
   .painting-row {
     grid-template-columns: 1fr;
   }
+}
+
+:root[data-theme="rainbow"] body {
+  background: linear-gradient(135deg, #ffe9f5, #fff9d9, #e7fff2, #e6f1ff, #f2e9ff);
+}
+
+:root[data-theme="rainbow"] .painting-row {
+  background: linear-gradient(140deg, #fff2fa, #f4f8ff, #f9fff0);
+}
+
+:root[data-theme="rainbow"] .results {
+  background: linear-gradient(140deg, #f6ecff, #e9f6ff, #fff5dc);
+  border-color: rgba(210, 155, 232, 0.5);
+}
+
+:root[data-theme="rainbow"] button {
+  background: linear-gradient(150deg, #f8d6ff, #cfe4ff, #d7f8e5);
+  color: #3a2f52;
+}
+
+:root[data-theme="rainbow"] .theme-toggle {
+  background: linear-gradient(150deg, #f8d6ff, #ffe6c8);
 }

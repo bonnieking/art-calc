@@ -7,6 +7,7 @@ const themeToggle = document.getElementById("theme-toggle");
 
 const MOBILE_STORAGE_KEY = "art-calc:last-layout";
 const THEME_KEY = "art-calc:theme";
+const THEMES = ["light", "dark", "rainbow"];
 
 const state = {
   eyeHeight: 57,
@@ -22,13 +23,18 @@ function fmt(v) {
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   if (themeToggle) {
-    themeToggle.textContent = theme === "dark" ? "Light" : "Dark";
+    const labels = {
+      light: "Theme: Light",
+      dark: "Theme: Dark",
+      rainbow: "Theme: Rainbow",
+    };
+    themeToggle.textContent = labels[theme] || "Theme";
   }
 }
 
 function initTheme() {
   const saved = localStorage.getItem(THEME_KEY);
-  if (saved === "dark" || saved === "light") {
+  if (THEMES.includes(saved)) {
     applyTheme(saved);
     return;
   }
@@ -39,8 +45,9 @@ function initTheme() {
 
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
-    const next = current === "dark" ? "light" : "dark";
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const currentIdx = THEMES.indexOf(current);
+    const next = THEMES[(currentIdx + 1 + THEMES.length) % THEMES.length];
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
   });
